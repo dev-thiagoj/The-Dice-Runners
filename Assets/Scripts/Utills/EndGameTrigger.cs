@@ -9,6 +9,7 @@ public class EndGameTrigger : MonoBehaviour
         if (other.transform.CompareTag("Player"))
         {
             GameManager.Instance.checkedEndLine = true;
+            PlayerController.Instance.isInvencible = true;
             GameManager.Instance.EndGame();
         }
     }

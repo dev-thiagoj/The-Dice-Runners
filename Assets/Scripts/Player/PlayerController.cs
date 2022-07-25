@@ -109,7 +109,7 @@ public class PlayerController : Singleton<PlayerController>
 
     public void InvokeStartRun()
     {
-        Invoke(nameof(StartRun), 2);
+        Invoke(nameof(StartRun), 3);
         StartCoroutine(ExpressionsCoroutine(0));
     }
 

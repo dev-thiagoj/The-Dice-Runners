@@ -33,6 +33,9 @@ public class GameManager : Singleton<GameManager>
     public GameObject pauseScreen;
     private bool _isGameStarted;
 
+    [Header("Tutorial")]
+    public GameObject[] tutorialImages;
+
     protected override void Awake()
     {
         base.Awake();
@@ -82,7 +85,7 @@ public class GameManager : Singleton<GameManager>
         _isGameStarted = true;
         cameraCanvas.SetActive(true);
         uiValues.SetActive(true);
-        //PlayerController.Instance.canRun = true;
+        StartCoroutine(TutorialCoroutine());
         PlayerController.Instance.InvokeStartRun();
         RollDice.Instance.canMove = true;
         RollDice.Instance.CallDiceSFX();
@@ -160,6 +163,17 @@ public class GameManager : Singleton<GameManager>
             {
                 star.SetActive(true);
             }
+        }
+    }
+
+    public IEnumerator TutorialCoroutine()
+    {
+        for(int i = 0; i < tutorialImages.Length; i++)
+        {
+            tutorialImages[i].SetActive(true);
+            yield return new WaitForSeconds(3);
+            tutorialImages[i].SetActive(false);
+            yield return new WaitForSeconds(1);
         }
     }
 }
