@@ -63,7 +63,6 @@ public class DestroyTrap : MonoBehaviour
         {
             foreach (var ps in particleSystems)
             {
-                Debug.Log("PS Play");
                 ps.Play();
             }
         }

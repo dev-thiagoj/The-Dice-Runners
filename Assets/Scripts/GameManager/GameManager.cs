@@ -74,8 +74,7 @@ public class GameManager : Singleton<GameManager>
     {
         btnContainer.transform.DOScale(0, timeBtnAnim).SetEase(ease).From();
     }
-
-    #region === DEBUG ===
+    
     [NaughtyAttributes.Button]
     public void StartRun()
     {
@@ -83,11 +82,12 @@ public class GameManager : Singleton<GameManager>
         _isGameStarted = true;
         cameraCanvas.SetActive(true);
         uiValues.SetActive(true);
-        PlayerController.Instance.canRun = true;
+        //PlayerController.Instance.canRun = true;
+        PlayerController.Instance.InvokeStartRun();
         RollDice.Instance.canMove = true;
         RollDice.Instance.CallDiceSFX();
     }
-    #endregion
+    
 
     [NaughtyAttributes.Button]
     public void PauseGame()

@@ -29,7 +29,7 @@ public class PlayerController : Singleton<PlayerController>
     float distToGround;
     float spaceToGround = .3f;
 
-    [Header("Turbo")]
+    [Header("Turbo PowerUp")]
     public float turboSpeed;
     public int maxTurbos = 3;
     public int _currTurbo;
@@ -42,8 +42,20 @@ public class PlayerController : Singleton<PlayerController>
     public float magneticTime;
     public bool _hasMagnetic = false;
 
+    [Header("Invencible Powerup")]
+    public MeshRenderer[] playerMeshs;
+    public SkinnedMeshRenderer[] playerSkinned;
+    public int blinksTimes = 100;
+    public bool isInvencible = false;
+
     [Header("Bounds")]
     private float range = 5.6f;
+
+    [Header("Expressions")]
+    public Transform[] expressions;
+    public float animationDuration;
+    public Ease ease;
+    int _index;
 
     public bool _isAlive = true;
 
@@ -52,6 +64,8 @@ public class PlayerController : Singleton<PlayerController>
         if (characterController == null) characterController = GetComponent<CharacterController>();
         if (animator == null) animator = GetComponentInChildren<Animator>();
         if (audioSource == null) audioSource = GetComponentInChildren<AudioSource>();
+        playerMeshs = GetComponentsInChildren<MeshRenderer>();
+        playerSkinned = GetComponentsInChildren<SkinnedMeshRenderer>();
     }
 
     protected override void Awake()
@@ -74,9 +88,9 @@ public class PlayerController : Singleton<PlayerController>
         {
             IsGrounded();
             Move();
-            if(IsGrounded()) Jump();
+            if (IsGrounded()) Jump();
             Bounds();
-            if(IsGrounded()) Inputs();
+            if (IsGrounded()) Inputs();
         }
 
         if (!canRun) animator.SetTrigger("Idle");
@@ -93,8 +107,20 @@ public class PlayerController : Singleton<PlayerController>
 
     #region === MOVEMENTS ===
 
+    public void InvokeStartRun()
+    {
+        Invoke(nameof(StartRun), 2);
+        StartCoroutine(ExpressionsCoroutine(0));
+    }
+
+    public void StartRun()
+    {
+        canRun = true;
+    }
+
     public void Move()
     {
+        if (isInvencible) _currRunSpeed = 6;
 
         var move = new Vector3((Input.GetAxis("Horizontal")) * -_currSideSpeed, 0, _currRunSpeed);
         _vSpeed -= gravity * Time.deltaTime;
@@ -162,17 +188,27 @@ public class PlayerController : Singleton<PlayerController>
         animator.speed = 1;
     }
 
+    [NaughtyAttributes.Button]
+    public void ExpressionsDebug()
+    {
+        _index = 0;
+        StartCoroutine(ExpressionsCoroutine(0));
+    }
+
     #endregion
 
     #region === HEALTH ===
     public void Dead()
     {
-        EnableRagDoll();
-        _isAlive = false;
-        canRun = false;
-        SFXPool.Instance.Play(SFXType.DEATH_03);
-        //particleSystem.Stop();
-        OnDead();
+        if (!isInvencible)
+        {
+            EnableRagDoll();
+            _isAlive = false;
+            canRun = false;
+            SFXPool.Instance.Play(SFXType.DEATH_03);
+            StartCoroutine(ExpressionsCoroutine(1));
+            OnDead();
+        }
     }
 
     public void OnDead()
@@ -230,6 +266,52 @@ public class PlayerController : Singleton<PlayerController>
         magneticCollider.transform.DOScaleX(1, 1);
         MagneticOn(false);
         StopCoroutine(MagneticCoroutine());
+    }
+
+    [NaughtyAttributes.Button]
+    public void StartDebugCoroutine()
+    {
+        StartCoroutine(InvencibleCoroutine());
+    }
+
+    public IEnumerator InvencibleCoroutine()
+    {
+        for(int i = 0; i < blinksTimes; i++)
+        {
+            foreach (var mesh in playerMeshs)
+            {
+                mesh.enabled = false;
+            }
+
+            foreach (var skinned in playerSkinned)
+            {
+                skinned.enabled = false;
+            }
+
+            yield return new WaitForSeconds(0.1f);
+
+            foreach (var mesh in playerMeshs)
+            {
+                mesh.enabled = true;
+            }
+
+            foreach (var skinned in playerSkinned)
+            {
+                skinned.enabled = true;
+            }
+
+            yield return new WaitForSeconds(0.1f);
+        }
+    }
+
+    #endregion
+
+    #region === EXPRESSIONS ===
+
+    public IEnumerator ExpressionsCoroutine(int index)
+    {
+        expressions[index].transform.DOScale(0.5f, animationDuration).SetLoops(2, LoopType.Yoyo).SetEase(ease);
+        yield return new WaitForEndOfFrame();
     }
 
     #endregion

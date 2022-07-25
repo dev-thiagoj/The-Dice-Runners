@@ -21,7 +21,11 @@ public class PlayerKillerByTrigger : MonoBehaviour
     public void PlaySFX()
     {
         //SFXPool.Instance.Play(sfxType);
-        audioSource.volume = sfxVolume;
-        audioSource.Play();
+        if (audioSource != null)
+        {
+            audioSource.volume = sfxVolume;
+            audioSource.Play();
+        }
+
     }
 }
