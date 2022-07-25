@@ -6,11 +6,14 @@ using Singleton;
 public class RollDice : Singleton<RollDice>
 {
     public Rigidbody rigidbody;
+    public Transform diceToRoll;
     public AudioSource audioSource;
 
+    [Range(4, 6)]
     public float speedRoll = 3;
-    public bool canRoll = true;
+    public float moveSpeed = 5;
     public float startSFXDelay = 3;
+    public bool canMove;
 
     protected override void Awake()
     {
@@ -20,19 +23,18 @@ public class RollDice : Singleton<RollDice>
     #region === DEBUG ===
     public void TurnCanRollTrue()
     {
-        canRoll = true;
+        canMove = true;
     }
     #endregion
 
     // Update is called once per frame
     void Update()
     {
-        if (canRoll)
+        if (canMove)
         {
-            //rigidbody.AddForce(Vector3.forward * 15 * Time.deltaTime);
-            rigidbody.transform.position += Vector3.forward * 5 * Time.deltaTime;
-            transform.Rotate(speedRoll, 0.0f, 0.0f);
-            //Testando Github Guto
+            rigidbody.transform.position += Vector3.forward * moveSpeed * Time.deltaTime;
+            
+            diceToRoll.transform.Rotate(0.0f, -speedRoll, 0.0f);
         }
     }
 

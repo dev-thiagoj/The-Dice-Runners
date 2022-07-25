@@ -16,9 +16,9 @@ public class ItemCollectableCoin : ItemCollectableBase
 
     protected override void OnCollect()
     {
-        Debug.Log("OnCollect");
         base.OnCollect();
         collider.enabled = false;
+        SFXPool.Instance.Play(SFXType.DICE_COLLECT_04);
         collect = true;
         ItemManager.Instance.AddCoins();
     }

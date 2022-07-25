@@ -8,6 +8,6 @@ public class FootstepsSFX : MonoBehaviour
 
     public void PlayFootsteps()
     {
-        SFXPool.Instance.Play(SFXType.FOOTSTEPS);
+        SFXPool.Instance.Play(SFXType.FOOTSTEPS_01);
     }
 }

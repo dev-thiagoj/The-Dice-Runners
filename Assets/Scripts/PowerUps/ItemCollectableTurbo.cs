@@ -16,9 +16,9 @@ public class ItemCollectableTurbo : ItemCollectableBase
 
     protected override void OnCollect()
     {
-        Debug.Log("OnCollect");
         base.OnCollect();
         collider.enabled = false;
+        SFXPool.Instance.Play(SFXType.TURBO_COLLECT_05);
         collect = true;
         ItemManager.Instance.AddTurbo();
         PlayerController.Instance._currTurbo--;

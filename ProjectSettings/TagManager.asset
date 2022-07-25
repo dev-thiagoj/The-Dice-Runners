@@ -8,6 +8,9 @@ TagManager:
   - Powerup
   - Dice
   - Trap
+  - Spike
+  - StatueTrigger
+  - Wall
   layers:
   - Default
   - TransparentFX

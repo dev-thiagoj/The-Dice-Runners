@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 5233498267782109801}
   - component: {fileID: 5233498267782109800}
   - component: {fileID: 5233498267782109802}
-  - component: {fileID: 645738274}
   m_Layer: 0
   m_Name: PFB_PowerupTurbo
   m_TagString: Powerup
@@ -62,7 +61,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.52
+  m_Radius: 0.73
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &5233498267782109802
 MonoBehaviour:
@@ -84,19 +83,6 @@ MonoBehaviour:
   collect: 0
   lerpSpeed: 5
   minDistance: 1
---- !u!114 &645738274
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5233498267782109783}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b97cc04bc814064fb4f6e3ed55ddc54, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 3
 --- !u!1001 &4092356552140895911
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -178,3 +164,19 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8675985045912274422, guid: 6394e566031b8c644a81abd2ea14e3f3, type: 3}
   m_PrefabInstance: {fileID: 4092356552140895911}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1790981328651775988
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4660577952766522198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b97cc04bc814064fb4f6e3ed55ddc54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 5
+  rotateX: 1
+  rotateY: 0
+  rotateZ: 0

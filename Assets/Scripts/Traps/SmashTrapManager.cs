@@ -13,14 +13,15 @@ public class SmashTrapManager : MonoBehaviour
     [Space]
     public float dir;
     public float moveDuration;
+    public float delaySmashs;
     public float timeToDestroy = 3;
     public Ease ease;
 
-    private TimerHelper _timerHelper;
+    //private TimerHelper timerHelper;
 
     private void OnValidate()
     {
-        if (_timerHelper == null) _timerHelper = GetComponentInParent<TimerHelper>();
+        //if (_timerHelper == null) _timerHelper = GetComponentInParent<TimerHelper>();
         if (trap == null) trap = GetComponent<Transform>();
         if (particleSystem == null) particleSystem = GetComponentInChildren<ParticleSystem>();
         if (collider == null) collider = GetComponent<Collider>();
@@ -28,6 +29,11 @@ public class SmashTrapManager : MonoBehaviour
     }
 
     void Start()
+    {
+        Invoke(nameof(StartCoroutine), 2);
+    }
+
+    public void StartCoroutine()
     {
         StartCoroutine(SmashTrapCoroutine());
     }
@@ -42,7 +48,7 @@ public class SmashTrapManager : MonoBehaviour
         while (true)
         {
             TrapClose();
-            yield return new WaitForSeconds(_timerHelper.randomTime);
+            yield return new WaitForSeconds(delaySmashs);
         }
     }
 

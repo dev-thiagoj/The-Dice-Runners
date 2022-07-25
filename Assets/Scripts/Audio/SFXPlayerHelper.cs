@@ -31,7 +31,7 @@ public class SFXPlayerHelper : MonoBehaviour
 
     public void PlayFootstepsSFX()
     {
-        SFXPool.Instance.Play(SFXType.FOOTSTEPS);
+        SFXPool.Instance.Play(SFXType.FOOTSTEPS_01);
     }
 
     public void PlayAudioSource()

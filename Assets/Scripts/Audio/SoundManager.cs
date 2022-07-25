@@ -5,7 +5,7 @@ using Singleton;
 public class SoundManager : Singleton<SoundManager>
 {
     public List<MusicSetup> musicSetups;
-    public List<SFXSetup> sfxSetups;
+    
 
     [Header("Sound On/Off")]
     
@@ -14,8 +14,6 @@ public class SoundManager : Singleton<SoundManager>
     protected override void Awake()
     {
         base.Awake();
-
-        
     }
 
     public void PlayMusicbyType(MusicType musicType)
@@ -29,11 +27,6 @@ public class SoundManager : Singleton<SoundManager>
     public MusicSetup GetMusicByType(MusicType musicType)
     {
         return musicSetups.Find(i => i.musicType == musicType);
-    }
-    
-    public SFXSetup GetSFXByType(SFXType sfxType)
-    {
-        return sfxSetups.Find(i => i.sfxType == sfxType);
     }
 
     public void TurnMusicOff()
@@ -61,20 +54,5 @@ public enum MusicType
 public class MusicSetup
 {
     public MusicType musicType;
-    public AudioClip audioClip;
-}
-
-public enum SFXType
-{
-    NONE,
-    DICE_COLLECT,
-    TURBO_COLLECT,
-    FOOTSTEPS
-}
-
-[System.Serializable]
-public class SFXSetup
-{
-    public SFXType sfxType;
     public AudioClip audioClip;
 }

@@ -16,7 +16,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &5460070297638281398
 Transform:
@@ -4878,7 +4878,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &5460070297682043484
 Transform:
@@ -9742,7 +9742,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &5460070298024432545
 Transform:
@@ -9752,8 +9752,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5460070298024432544}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.6031, y: 1.0518, z: 0.0295}
-  m_LocalScale: {x: 7.8818784, y: 0.52359927, z: 0.74697715}
+  m_LocalPosition: {x: 0.8171, y: 1.0518, z: 0.0295}
+  m_LocalScale: {x: 7.453892, y: 0.52359927, z: 0.74697715}
   m_Children: []
   m_Father: {fileID: 7472926974296307371}
   m_RootOrder: 6
@@ -9818,8 +9818,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 0.08826042, z: 0.29566598}
+  m_Center: {x: 0, y: 0.4558698, z: 0.117906876}
 --- !u!114 &5460070298024432574
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9832,6 +9832,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 357c7bd4b73443849952249f21c89f8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioSource: {fileID: 0}
+  sfxVolume: 0
 --- !u!1 &7471945506246944659
 GameObject:
   m_ObjectHideFlags: 0
@@ -9844,12 +9846,13 @@ GameObject:
   - component: {fileID: 7477046112316343457}
   - component: {fileID: 7485032417716167849}
   - component: {fileID: 7471945506246944656}
+  - component: {fileID: 2017910814660119718}
   m_Layer: 0
   m_Name: BlockSpike02 01
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &7474685829513386813
 Transform:
@@ -9925,8 +9928,24 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.0000002, y: 0.9879732, z: 1.0000004}
-  m_Center: {x: 0.00000004329845, y: 0.060652506, z: 0.00000004329845}
+  m_Size: {x: 5.7877035, y: 1.0865738, z: 1.54}
+  m_Center: {x: 2.3938496, y: 0.10995268, z: 0.0040069683}
+--- !u!54 &2017910814660119718
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7471945506246944659}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 1
 --- !u!1 &7471945506832276810
 GameObject:
   m_ObjectHideFlags: 0
@@ -9938,13 +9957,12 @@ GameObject:
   - component: {fileID: 7474685830002778596}
   - component: {fileID: 7477046111797542520}
   - component: {fileID: 7485032418240224880}
-  - component: {fileID: 7471945506832276811}
   m_Layer: 0
   m_Name: BlockSpike02D 04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &7474685830002778596
 Transform:
@@ -10010,19 +10028,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &7471945506832276811
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7471945506832276810}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.0000002, y: 0.99129593, z: 1.0000004}
-  m_Center: {x: 0.00000004329845, y: 0.062314365, z: -0.0000004329845}
 --- !u!1 &7471945507093836374
 GameObject:
   m_ObjectHideFlags: 0
@@ -10034,13 +10039,12 @@ GameObject:
   - component: {fileID: 7474685828648734456}
   - component: {fileID: 7477046110983246180}
   - component: {fileID: 7485032418513711468}
-  - component: {fileID: 7471945507093836375}
   m_Layer: 0
   m_Name: BlockSpike02D 03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &7474685828648734456
 Transform:
@@ -10105,19 +10109,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &7471945507093836375
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7471945507093836374}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.0000002, y: 1.0220065, z: 1.0000004}
-  m_Center: {x: 0.00000004329845, y: 0.0776692, z: 0.00000004329845}
 --- !u!1 &7471945507413469202
 GameObject:
   m_ObjectHideFlags: 0
@@ -10129,13 +10120,12 @@ GameObject:
   - component: {fileID: 7474685828465349820}
   - component: {fileID: 7477046111200119584}
   - component: {fileID: 7485032418699193128}
-  - component: {fileID: 7471945507413469203}
   m_Layer: 0
   m_Name: BlockSpike02D 06
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &7474685828465349820
 Transform:
@@ -10200,19 +10190,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &7471945507413469203
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7471945507413469202}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.0000001, y: 1.0011247, z: 1.0000002}
-  m_Center: {x: 0.000000043298446, y: 0.06722852, z: 0.000000043298446}
 --- !u!1 &7471945507932665254
 GameObject:
   m_ObjectHideFlags: 0
@@ -10224,13 +10201,12 @@ GameObject:
   - component: {fileID: 7474685829017798920}
   - component: {fileID: 7477046110614115988}
   - component: {fileID: 7485032419285497500}
-  - component: {fileID: 7471945507932665255}
   m_Layer: 0
   m_Name: BlockSpike02D 02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &7474685829017798920
 Transform:
@@ -10296,19 +10272,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &7471945507932665255
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7471945507932665254}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.0000002, y: 0.99102914, z: 1.0000004}
-  m_Center: {x: 0.00000004329845, y: 0.06218081, z: 0.00000004329845}
 --- !u!1 &7471945507985752466
 GameObject:
   m_ObjectHideFlags: 0
@@ -10320,13 +10283,12 @@ GameObject:
   - component: {fileID: 7474685828841045308}
   - component: {fileID: 7477046110837088928}
   - component: {fileID: 7485032419460678312}
-  - component: {fileID: 7471945507985752467}
   m_Layer: 0
   m_Name: BlockSpike02D 05
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &7474685828841045308
 Transform:
@@ -10391,19 +10353,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &7471945507985752467
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7471945507985752466}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.0000002, y: 0.97921425, z: 1.0000004}
-  m_Center: {x: 0.00000004329845, y: 0.05627339, z: 0.00000004329845}
 --- !u!1 &7472926974296307370
 GameObject:
   m_ObjectHideFlags: 0
@@ -10420,7 +10369,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &7472926974296307371
 Transform:
@@ -10429,7 +10378,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7472926974296307370}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.1, y: 0.56, z: 8.79}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -10474,11 +10423,6 @@ MonoBehaviour:
   - {fileID: 5460070297682043482}
   colliders:
   - {fileID: 7471945506246944656}
-  - {fileID: 7471945507932665255}
-  - {fileID: 7471945507093836375}
-  - {fileID: 7471945506832276811}
-  - {fileID: 7471945507985752467}
-  - {fileID: 7471945507413469203}
   meshRenderers:
   - {fileID: 7485032417716167849}
   - {fileID: 7485032419285497500}
@@ -10486,4 +10430,6 @@ MonoBehaviour:
   - {fileID: 7485032418240224880}
   - {fileID: 7485032419460678312}
   - {fileID: 7485032418699193128}
+  audioSource: {fileID: 0}
+  volumeSFX: 0
   timeToDestroy: 3
