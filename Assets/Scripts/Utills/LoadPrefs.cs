@@ -21,5 +21,12 @@ public class LoadPrefs : MonoBehaviour
             volumeSlider.value = localVolume;
             musicSource.volume = localVolume;
         }
+
+        if (PlayerPrefs.HasKey("viewedTutorial"))
+        {
+            int localValue = PlayerPrefs.GetInt("viewedTutorial");
+
+            GameManager.Instance._viewed = localValue;
+        }
     }
 }

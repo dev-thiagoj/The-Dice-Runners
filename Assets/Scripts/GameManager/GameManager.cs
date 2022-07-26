@@ -35,6 +35,7 @@ public class GameManager : Singleton<GameManager>
 
     [Header("Tutorial")]
     public GameObject[] tutorialImages;
+    public int _viewed = 0;
 
     private void OnEnable()
     {
@@ -66,6 +67,7 @@ public class GameManager : Singleton<GameManager>
     private void Update()
     {
         if (_isGameStarted && Input.GetKeyDown(KeyCode.Escape)) PauseGame();
+        Debug.Log(_viewed);
     }
 
     void TurnAllStarsOff()
@@ -87,7 +89,7 @@ public class GameManager : Singleton<GameManager>
     {
         btnContainer.transform.DOScale(0, timeBtnAnim).SetEase(ease).From();
     }
-    
+
     public void StartRun()
     {
         SFXPool.Instance.CreatePool();
@@ -153,11 +155,11 @@ public class GameManager : Singleton<GameManager>
 
     void StarsCalculate()
     {
-        if(totalScore > 200 && totalScore < 500)
+        if (totalScore > 200 && totalScore < 500)
         {
             fullStars[0].SetActive(true);
         }
-        else if(totalScore >= 500 && totalScore < 700)
+        else if (totalScore >= 500 && totalScore < 700)
         {
             fullStars[0].SetActive(true);
             fullStars[1].SetActive(true);
@@ -173,17 +175,21 @@ public class GameManager : Singleton<GameManager>
 
     public void StartTutorialCoroutine()
     {
-        StartCoroutine(TutorialCoroutine());
+        if (_viewed == 0) StartCoroutine(TutorialCoroutine());
+        else return;
     }
 
     public IEnumerator TutorialCoroutine()
     {
-        for(int i = 0; i < tutorialImages.Length; i++)
+        for (int i = 0; i < tutorialImages.Length; i++)
         {
             tutorialImages[i].SetActive(true);
             yield return new WaitForSeconds(3);
             tutorialImages[i].SetActive(false);
             yield return new WaitForSeconds(1);
         }
+
+        _viewed = 1;
+        PlayerPrefs.SetInt("viewedTutorial", 1);
     }
 }
