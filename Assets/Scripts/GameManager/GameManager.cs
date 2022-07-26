@@ -36,6 +36,16 @@ public class GameManager : Singleton<GameManager>
     [Header("Tutorial")]
     public GameObject[] tutorialImages;
 
+    private void OnEnable()
+    {
+        Actions.startTutorial += StartTutorialCoroutine;
+    }
+
+    private void OnDisable()
+    {
+        Actions.startTutorial -= StartTutorialCoroutine;
+    }
+
     protected override void Awake()
     {
         base.Awake();
@@ -78,21 +88,18 @@ public class GameManager : Singleton<GameManager>
         btnContainer.transform.DOScale(0, timeBtnAnim).SetEase(ease).From();
     }
     
-    [NaughtyAttributes.Button]
     public void StartRun()
     {
         SFXPool.Instance.CreatePool();
         _isGameStarted = true;
         cameraCanvas.SetActive(true);
         uiValues.SetActive(true);
-        StartCoroutine(TutorialCoroutine());
+        //StartCoroutine(TutorialCoroutine());
         PlayerController.Instance.InvokeStartRun();
         RollDice.Instance.InvokeStartRoll();
         RollDice.Instance.CallDiceSFX();
     }
-    
 
-    [NaughtyAttributes.Button]
     public void PauseGame()
     {
         Time.timeScale = 0;
@@ -100,7 +107,6 @@ public class GameManager : Singleton<GameManager>
         AudioListener.pause = true;
     }
 
-    [NaughtyAttributes.Button]
     public void ResumeGame()
     {
         Time.timeScale = 1;
@@ -108,7 +114,6 @@ public class GameManager : Singleton<GameManager>
         AudioListener.pause = false;
     }
 
-    [NaughtyAttributes.Button]
     public void EndGame()
     {
         PlayerController.Instance.canRun = false;
@@ -164,6 +169,11 @@ public class GameManager : Singleton<GameManager>
                 star.SetActive(true);
             }
         }
+    }
+
+    public void StartTutorialCoroutine()
+    {
+        StartCoroutine(TutorialCoroutine());
     }
 
     public IEnumerator TutorialCoroutine()

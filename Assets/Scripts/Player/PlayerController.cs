@@ -56,7 +56,7 @@ public class PlayerController : Singleton<PlayerController>
     public Transform[] expressions;
     public float animationDuration;
     public Ease ease;
-    int _index;
+    //int _index;
 
     public bool _isAlive = true;
 
@@ -124,6 +124,7 @@ public class PlayerController : Singleton<PlayerController>
     public void StartRun()
     {
         canRun = true;
+        Actions.startTutorial();
     }
 
     public void Move()
@@ -182,15 +183,6 @@ public class PlayerController : Singleton<PlayerController>
         }
     }
 
-    #region === DEBUGS ===
-
-    [NaughtyAttributes.Button]
-    public void StopRun()
-    {
-        runSpeed = 0;
-    }
-
-    [NaughtyAttributes.Button]
     public void BackRun()
     {
         _currRunSpeed = runSpeed;
@@ -199,27 +191,18 @@ public class PlayerController : Singleton<PlayerController>
         animator.speed = 1;
     }
 
-    [NaughtyAttributes.Button]
-    public void ExpressionsDebug()
-    {
-        _index = 0;
-        StartCoroutine(ExpressionsCoroutine(0));
-    }
-
-    #endregion
-
     #region === HEALTH ===
     public void Dead()
     {
         _isAlive = true;
         canRun = false;
+        characterController.detectCollisions = false;
         StartCoroutine(ExpressionsCoroutine(1));
         OnDead();
     }
 
     public void OnDead()
     {
-        characterController.detectCollisions = false;
         SFXPool.Instance.Play(SFXType.DEATH_03);
         animator.SetTrigger("Die");
         //if(IsGrounded()) animator.SetTrigger("Die");
