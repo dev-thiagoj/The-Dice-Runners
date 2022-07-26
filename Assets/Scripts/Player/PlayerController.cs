@@ -159,7 +159,7 @@ public class PlayerController : Singleton<PlayerController>
     {
         _currRunSpeed = walkSpeed;
         _currSideSpeed = walkSpeed;
-        _currJumpForce = 0;
+        jumpForce = 0;
         animator.speed = .5f;
     }
     #endregion

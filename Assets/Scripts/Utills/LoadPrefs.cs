@@ -11,7 +11,7 @@ public class LoadPrefs : MonoBehaviour
     public Slider volumeSlider;
     public TextMeshProUGUI sliderValue;
 
-    private void Start()
+    private void Awake()
     {
         if (PlayerPrefs.HasKey("masterVolume"))
         {
