@@ -67,7 +67,6 @@ public class GameManager : Singleton<GameManager>
     private void Update()
     {
         if (_isGameStarted && Input.GetKeyDown(KeyCode.Escape)) PauseGame();
-        Debug.Log(_viewed);
     }
 
     void TurnAllStarsOff()
