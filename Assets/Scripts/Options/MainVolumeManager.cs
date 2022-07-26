@@ -24,8 +24,13 @@ public class MainVolumeManager : MonoBehaviour
 
     public void SetMainVolume()
     {
-        musicSource.volume = volumeSlider.value / 2;
+        musicSource.volume = volumeSlider.value;
         clickSource.volume = volumeSlider.value;
         SFXPool.Instance.poolVolume = volumeSlider.value;
+    }
+
+    public void VolumeAplly()
+    {
+        PlayerPrefs.SetFloat("masterVolume", musicSource.volume);
     }
 }
