@@ -87,7 +87,7 @@ public class GameManager : Singleton<GameManager>
         uiValues.SetActive(true);
         StartCoroutine(TutorialCoroutine());
         PlayerController.Instance.InvokeStartRun();
-        RollDice.Instance.canMove = true;
+        RollDice.Instance.InvokeStartRoll();
         RollDice.Instance.CallDiceSFX();
     }
     

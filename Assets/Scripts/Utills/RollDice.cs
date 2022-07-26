@@ -38,6 +38,16 @@ public class RollDice : Singleton<RollDice>
         }
     }
 
+    public void InvokeStartRoll()
+    {
+        Invoke(nameof(StartRoll), 3);
+    }
+
+    public void StartRoll()
+    {
+        canMove = true;
+    }
+
     public void DestroyDice()
     {
         Destroy(gameObject, 5);

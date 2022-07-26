@@ -24,7 +24,8 @@ public class PlayerController : Singleton<PlayerController>
 
     [Header("Jump")]
     float _vSpeed;
-    public float jumpForce = 5;
+    public float jumpForce = 8;
+    float _currJumpForce;
     public float gravity = 9.8f;
     float distToGround;
     float spaceToGround = .3f;
@@ -78,6 +79,7 @@ public class PlayerController : Singleton<PlayerController>
     {
         _currRunSpeed = runSpeed;
         _currSideSpeed = sideSpeed;
+        _currJumpForce = jumpForce;
         _currTurbo = 0;
     }
 
@@ -93,6 +95,7 @@ public class PlayerController : Singleton<PlayerController>
             if (IsGrounded()) Inputs();
         }
 
+        if (_isAlive == false && IsGrounded()) Dead();
         if (!canRun) animator.SetTrigger("Idle");
         if (canRun && IsGrounded()) animator.SetTrigger("Run");
     }
@@ -109,7 +112,12 @@ public class PlayerController : Singleton<PlayerController>
 
     public void InvokeStartRun()
     {
-        Invoke(nameof(StartRun), 3);
+        Invoke(nameof(StartRun), 5);
+        Invoke(nameof(StartExpressionsCoroutine), 4);
+    }
+
+    public void StartExpressionsCoroutine()
+    {
         StartCoroutine(ExpressionsCoroutine(0));
     }
 
@@ -131,16 +139,17 @@ public class PlayerController : Singleton<PlayerController>
 
     public void Jump()
     {
-
         if (characterController.isGrounded)
         {
             _vSpeed = 0;
 
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                _vSpeed = jumpForce;
+                _vSpeed = _currJumpForce;
+                _currSideSpeed = 0;
                 animator.SetTrigger("Jump");
                 SFXPool.Instance.Play(SFXType.JUMP_02);
+                Invoke(nameof(BackRun), 2);
             }
         }
     }
@@ -149,6 +158,7 @@ public class PlayerController : Singleton<PlayerController>
     {
         _currRunSpeed = walkSpeed;
         _currSideSpeed = walkSpeed;
+        jumpForce = 0;
         animator.speed = .5f;
     }
     #endregion
@@ -185,6 +195,7 @@ public class PlayerController : Singleton<PlayerController>
     {
         _currRunSpeed = runSpeed;
         _currSideSpeed = sideSpeed;
+        _currJumpForce = jumpForce;
         animator.speed = 1;
     }
 
@@ -200,29 +211,26 @@ public class PlayerController : Singleton<PlayerController>
     #region === HEALTH ===
     public void Dead()
     {
-        if (!isInvencible)
-        {
-            EnableRagDoll();
-            _isAlive = false;
-            canRun = false;
-            SFXPool.Instance.Play(SFXType.DEATH_03);
-            StartCoroutine(ExpressionsCoroutine(1));
-            OnDead();
-        }
+        _isAlive = true;
+        canRun = false;
+        StartCoroutine(ExpressionsCoroutine(1));
+        OnDead();
     }
 
     public void OnDead()
     {
-        runSpeed = 0;
         characterController.detectCollisions = false;
+        SFXPool.Instance.Play(SFXType.DEATH_03);
         animator.SetTrigger("Die");
+        //if(IsGrounded()) animator.SetTrigger("Die");
         Invoke(nameof(ShowEndGameScreen), 5);
     }
 
-    public void EnableRagDoll()
+    public void DieOnGround()
     {
-        //rigidbody.isKinematic = true;
-        //rigidbody.detectCollisions = false;
+        if (_isAlive == false && IsGrounded())
+        {
+        }
     }
 
     public void ShowEndGameScreen()
@@ -276,7 +284,7 @@ public class PlayerController : Singleton<PlayerController>
 
     public IEnumerator InvencibleCoroutine()
     {
-        for(int i = 0; i < blinksTimes; i++)
+        for (int i = 0; i < blinksTimes; i++)
         {
             foreach (var mesh in playerMeshs)
             {

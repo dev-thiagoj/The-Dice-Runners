@@ -19,7 +19,7 @@ public class ItemManager : Singleton<ItemManager>
     private void Start()
     {
         dice = 0;
-        turbo = 3;
+        turbo = PlayerController.Instance.maxTurbos;
     }
 
     private void Update()
