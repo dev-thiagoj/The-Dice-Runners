@@ -4,19 +4,56 @@ using Singleton;
 
 public class SoundManager : Singleton<SoundManager>
 {
-    public List<MusicSetup> musicSetups;
-    
+    public AudioListener mainListener;
+    public GameObject[] soundButtons;
+    int _index;
+    bool _check;
 
-    [Header("Sound On/Off")]
-    
-    public AudioSource musicSource;
+    //Not in use
+
+    //public List<MusicSetup> musicSetups;
+    //public AudioSource musicSource;
+
 
     protected override void Awake()
     {
         base.Awake();
+
+        _check = true;
+        _index = 0;
     }
 
-    public void PlayMusicbyType(MusicType musicType)
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            _check = !_check;
+            TurnSoundOnOff(_check);
+            TurnImageOnOff();
+        }
+    }
+
+    public void TurnSoundOnOff(bool b)
+    {
+        mainListener.enabled = b;
+    }
+
+    public void TurnImageOnOff()
+    {
+        foreach (var button in soundButtons)
+        {
+            button.SetActive(false);
+        }
+
+        soundButtons[_index].SetActive(true);
+        _index++;
+
+        if (_index == 2) _index = 0;
+    }
+
+    #region === NotInUse ===
+
+    /*public void PlayMusicbyType(MusicType musicType)
     {
         var music = GetMusicByType(musicType);
 
@@ -39,10 +76,11 @@ public class SoundManager : Singleton<SoundManager>
     {
         musicSource.enabled = true;
         musicSource.Play();
-    }
+    }*/
+    #endregion
 }
 
-public enum MusicType
+/*public enum MusicType
 {
     NONE,
     AMBIENCE_MAIN,
@@ -55,4 +93,4 @@ public class MusicSetup
 {
     public MusicType musicType;
     public AudioClip audioClip;
-}
+}*/

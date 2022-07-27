@@ -70,7 +70,6 @@ public class GameManager : Singleton<GameManager>
     private void Update()
     {
         if (_isGameStarted && Input.GetKeyDown(KeyCode.Escape)) PauseGame();
-        Debug.Log(_viewed);
     }
 
     void TurnAllStarsOff()
@@ -103,20 +102,27 @@ public class GameManager : Singleton<GameManager>
         PlayerController.Instance.InvokeStartRun();
         RollDice.Instance.InvokeStartRoll();
         RollDice.Instance.CallDiceSFX();
+        Cursor.visible = false;
     }
 
     public void PauseGame()
     {
+        RollDice.Instance.canMove = false;
         Time.timeScale = 0;
         pauseScreen.SetActive(true);
         AudioListener.pause = true;
+        Cursor.visible = true;
+
+        if (Input.GetKeyDown(KeyCode.Escape)) ResumeGame();
     }
 
     public void ResumeGame()
     {
         Time.timeScale = 1;
+        RollDice.Instance.canMove = true;
         pauseScreen.SetActive(false);
         AudioListener.pause = false;
+        Cursor.visible = false;
     }
 
     public void EndGame()
@@ -134,6 +140,7 @@ public class GameManager : Singleton<GameManager>
     public void ShowEndGameScreen()
     {
         endGameScreen.SetActive(true);
+        Cursor.visible = true;
     }
 
     public void RestartGame(int i)
