@@ -127,7 +127,7 @@ public class PlayerController : Singleton<PlayerController>
     public void StartRun()
     {
         canRun = true;
-        Actions.startTutorial();
+        //Actions.startTutorial();
     }
 
     public void Move()

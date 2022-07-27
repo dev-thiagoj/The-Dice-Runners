@@ -35,5 +35,12 @@ public class LoadPrefs : MonoBehaviour
 
             GameManager.Instance.isRestart = localValue;
         }
+
+        if (PlayerPrefs.HasKey("maxScore"))
+        {
+            int localValue = PlayerPrefs.GetInt("maxScore");
+
+            GameManager.Instance.maxScore = localValue;
+        }
     }
 }

@@ -8,11 +8,14 @@ using TMPro;
 
 public class GameManager : Singleton<GameManager>
 {
+
+    [Header("References")]
     public GameObject mainMenu;
     public GameObject uiValues;
     public GameObject cameraCanvas;
     public TextMeshProUGUI scoreText = null;
     public TextMeshProUGUI diceText = null;
+    public TextMeshProUGUI maxScoreText = null;
 
     [Header("Buttons Animation")]
     public GameObject btnContainer;
@@ -23,6 +26,7 @@ public class GameManager : Singleton<GameManager>
     public GameObject endGameScreen;
     public int finalScore;
     public int turboScore;
+    public int maxScore;
     public bool checkedEndLine = false;
 
     [Header("Restart Game")]
@@ -79,6 +83,8 @@ public class GameManager : Singleton<GameManager>
     private void Update()
     {
         if (_isGameStarted && Input.GetKeyDown(KeyCode.Escape)) PauseGame();
+
+        Debug.Log(maxScore);
     }
 
     void TurnAllStarsOff()
@@ -87,13 +93,6 @@ public class GameManager : Singleton<GameManager>
         {
             gameObject.SetActive(false);
         }
-    }
-
-    public void PlayCameraAnimation()
-    {
-
-
-        StartRun();
     }
 
     public void AnimationButtons()
@@ -160,6 +159,7 @@ public class GameManager : Singleton<GameManager>
 
     public void ExitApplication()
     {
+        PlayerPrefs.SetInt("viewedTutorial", 0);
         PlayerPrefs.SetInt("isRestart", 0);
         Application.Quit();
     }
@@ -169,6 +169,7 @@ public class GameManager : Singleton<GameManager>
         TurnTurboInPoints();
         totalScore = ItemManager.Instance.dice * turboScore;
         if (checkedEndLine) totalScore += 300;
+        SaveMaxScore();
         StarsCalculate();
         scoreText.text = "Score: " + totalScore.ToString("000");
         diceText.text = "Dices: " + ItemManager.Instance.dice.ToString("000");
@@ -179,6 +180,24 @@ public class GameManager : Singleton<GameManager>
         turboScore = ItemManager.Instance.turbo;
 
         if (turboScore == 0) turboScore = 1;
+    }
+
+    void SaveMaxScore()
+    {
+        if (totalScore > maxScore)
+        {
+            maxScore = totalScore;
+
+            maxScoreText.text = ("NEW  " + maxScore).ToString();
+            maxScoreText.color = Color.green;
+
+            PlayerPrefs.SetInt("maxScore", maxScore);
+        }
+        else
+        {
+            maxScoreText.text = maxScore.ToString();
+            maxScoreText.color = Color.yellow;
+        }
     }
 
     void StarsCalculate()
