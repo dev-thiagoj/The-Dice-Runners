@@ -37,6 +37,9 @@ public class GameManager : Singleton<GameManager>
     public GameObject[] tutorialImages;
     public int _viewed = 0;
 
+    [Header("Female Animation")]
+    public Animator femaleAnim;
+
     private void OnEnable()
     {
         Actions.startTutorial += StartTutorialCoroutine;
@@ -121,8 +124,15 @@ public class GameManager : Singleton<GameManager>
         PlayerController.Instance.canRun = false;
         cameraCanvas.SetActive(false);
         uiValues.SetActive(false);
-        RollDice.Instance.DestroyDice();
+        femaleAnim.SetTrigger("FemaleWin");
+        PlayerController.Instance.animator.SetTrigger("EndGame");
+        //RollDice.Instance.DestroyDice();
         UpdateUI();
+        Invoke(nameof(ShowEndGameScreen), 5);
+    }
+
+    public void ShowEndGameScreen()
+    {
         endGameScreen.SetActive(true);
     }
 

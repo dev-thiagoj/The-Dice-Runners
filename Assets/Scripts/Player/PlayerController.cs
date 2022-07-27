@@ -56,7 +56,9 @@ public class PlayerController : Singleton<PlayerController>
     public Transform[] expressions;
     public float animationDuration;
     public Ease ease;
-    //int _index;
+
+    [Header("Look At EndGame")]
+    public RotationLookAt rotationLook;
 
     public bool _isAlive = true;
 
@@ -67,6 +69,7 @@ public class PlayerController : Singleton<PlayerController>
         if (audioSource == null) audioSource = GetComponentInChildren<AudioSource>();
         playerMeshs = GetComponentsInChildren<MeshRenderer>();
         playerSkinned = GetComponentsInChildren<SkinnedMeshRenderer>();
+        if (rotationLook == null) rotationLook = GetComponent<RotationLookAt>();
     }
 
     protected override void Awake()
@@ -159,8 +162,16 @@ public class PlayerController : Singleton<PlayerController>
     {
         _currRunSpeed = walkSpeed;
         _currSideSpeed = walkSpeed;
-        jumpForce = 0;
+        _currJumpForce = 0;
         animator.speed = .5f;
+    }
+
+    public void BackRun()
+    {
+        _currRunSpeed = runSpeed;
+        _currSideSpeed = sideSpeed;
+        _currJumpForce = jumpForce;
+        animator.speed = 1;
     }
     #endregion
 
@@ -183,13 +194,6 @@ public class PlayerController : Singleton<PlayerController>
         }
     }
 
-    public void BackRun()
-    {
-        _currRunSpeed = runSpeed;
-        _currSideSpeed = sideSpeed;
-        _currJumpForce = jumpForce;
-        animator.speed = 1;
-    }
 
     #region === HEALTH ===
     public void Dead()
@@ -236,13 +240,17 @@ public class PlayerController : Singleton<PlayerController>
 
     public IEnumerator TurboCoroutine()
     {
-        _turboOn = true;
-        _currRunSpeed = turboSpeed;
-        SFXPool.Instance.Play(SFXType.USE_TURBO_06);
-        yield return new WaitForSeconds(turboTime);
+        if (!_turboOn)
+        {
+            _turboOn = true;
+            _currRunSpeed = turboSpeed;
+            SFXPool.Instance.Play(SFXType.USE_TURBO_06);
+            yield return new WaitForSeconds(turboTime);
+        }
+
         _currRunSpeed = runSpeed;
         _turboOn = false;
-        StopCoroutine(TurboCoroutine());
+        //StopCoroutine(TurboCoroutine());
     }
 
     public void MagneticOn(bool b = false)
