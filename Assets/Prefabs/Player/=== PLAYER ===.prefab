@@ -9620,6 +9620,7 @@ GameObject:
   - component: {fileID: 6137464384229991727}
   - component: {fileID: 696106334}
   - component: {fileID: 5542209290989605530}
+  - component: {fileID: 2285848425152646911}
   m_Layer: 0
   m_Name: === PLAYER ===
   m_TagString: Player
@@ -9807,6 +9808,20 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0
   m_Center: {x: 0, y: 0.95, z: 0.06}
+--- !u!114 &2285848425152646911
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6137464384229991725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab516f2a18da33f459259ed9beb51e82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canLook: 0
+  target: {fileID: 0}
 --- !u!1 &6981072161344269891
 GameObject:
   m_ObjectHideFlags: 0
@@ -11125,11 +11140,6 @@ SkinnedMeshRenderer:
   m_CorrespondingSourceObject: {fileID: 10185191657897045, guid: 2dfbb63c9cdf7504faf4ff26b0581598, type: 3}
   m_PrefabInstance: {fileID: 6137464383871995518}
   m_PrefabAsset: {fileID: 0}
---- !u!137 &3709229440598702734 stripped
-SkinnedMeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 7373927306290738416, guid: 2dfbb63c9cdf7504faf4ff26b0581598, type: 3}
-  m_PrefabInstance: {fileID: 6137464383871995518}
-  m_PrefabAsset: {fileID: 0}
 --- !u!23 &3635202525243636710 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 7448516423492744600, guid: 2dfbb63c9cdf7504faf4ff26b0581598, type: 3}
@@ -11158,6 +11168,11 @@ MeshRenderer:
 --- !u!23 &7873156450028969735 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 4066668297557381497, guid: 2dfbb63c9cdf7504faf4ff26b0581598, type: 3}
+  m_PrefabInstance: {fileID: 6137464383871995518}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &3709229440598702734 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 7373927306290738416, guid: 2dfbb63c9cdf7504faf4ff26b0581598, type: 3}
   m_PrefabInstance: {fileID: 6137464383871995518}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &239428512999388480

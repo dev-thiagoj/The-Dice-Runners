@@ -32,7 +32,6 @@ public class DestroyTrap : MonoBehaviour
         if (audioSource == null) return;
     }
 
-    [NaughtyAttributes.Button]
     public void HideTrap()
     {
         if (meshRenderers != null)

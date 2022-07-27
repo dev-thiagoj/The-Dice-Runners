@@ -192,8 +192,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 414150645146797953}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -6.247522, z: -0.5130821}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: -3.93, z: -0.16095}
+  m_LocalScale: {x: 1, y: 4.1722, z: 1.70426}
   m_Children: []
   m_Father: {fileID: 414150645329276919}
   m_RootOrder: 1
@@ -5201,9 +5201,12 @@ MonoBehaviour:
   - {fileID: 414150645149328637}
   - {fileID: 414150645441728647}
   colliders:
-  - {fileID: 0}
+  - {fileID: 414150645329276917}
+  - {fileID: 1361490737106469280}
+  - {fileID: 414150645146797982}
   meshRenderers:
   - {fileID: 427201090898666357}
+  skinnedRenderers: []
   audioSource: {fileID: 281192385568235007}
   volumeSFX: 1
   timeToDestroy: 3
@@ -10176,9 +10179,9 @@ GameObject:
   - component: {fileID: 2688900252154717888}
   - component: {fileID: 1361490737106469280}
   - component: {fileID: 5137836747481177793}
+  - component: {fileID: 3334010718209818731}
   - component: {fileID: 7570086353686660324}
   - component: {fileID: 6870597938273040096}
-  - component: {fileID: 3334010718209818731}
   m_Layer: 0
   m_Name: StatueD_RB
   m_TagString: Untagged
@@ -10230,6 +10233,22 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 122
   m_CollisionDetection: 0
+--- !u!114 &3334010718209818731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3231909102831671480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62b8092fe1d114249ac793dacd602371, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rigidbody: {fileID: 5137836747481177793}
+  audioHitFloor: {fileID: 7570086353686660324}
+  audioHitPlayer: {fileID: 6870597938273040096}
+  audioClips: []
 --- !u!82 &7570086353686660324
 AudioSource:
   m_ObjectHideFlags: 0
@@ -10422,19 +10441,3 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &3334010718209818731
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3231909102831671480}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62b8092fe1d114249ac793dacd602371, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rigidbody: {fileID: 5137836747481177793}
-  audioSource01: {fileID: 7570086353686660324}
-  audioSource02: {fileID: 6870597938273040096}
-  audioClips: []
