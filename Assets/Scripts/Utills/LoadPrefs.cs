@@ -28,5 +28,12 @@ public class LoadPrefs : MonoBehaviour
 
             GameManager.Instance._viewed = localValue;
         }
+
+        if (PlayerPrefs.HasKey("isRestart"))
+        {
+            int localValue = PlayerPrefs.GetInt("isRestart");
+
+            GameManager.Instance.isRestart = localValue;
+        }
     }
 }

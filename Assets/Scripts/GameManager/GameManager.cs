@@ -25,6 +25,9 @@ public class GameManager : Singleton<GameManager>
     public int turboScore;
     public bool checkedEndLine = false;
 
+    [Header("Restart Game")]
+    public int isRestart; //padrão binário, 0 = não e 1 = sim.
+
     [Header("Final Stars")]
     int totalScore;
     public List<GameObject> fullStars;
@@ -61,9 +64,15 @@ public class GameManager : Singleton<GameManager>
         Time.timeScale = 1;
         cameraCanvas.SetActive(false);
         uiValues.SetActive(false);
-        mainMenu.SetActive(true);
-        AnimationButtons();
-        _isGameStarted = false;
+
+        if (isRestart == 0)
+        {
+            mainMenu.SetActive(true);
+            AnimationButtons();
+            _isGameStarted = false;
+        }
+        else StartRun();
+
         TurnAllStarsOff();
     }
 
@@ -145,11 +154,13 @@ public class GameManager : Singleton<GameManager>
 
     public void RestartGame(int i)
     {
+        PlayerPrefs.SetInt("isRestart", 1);
         SceneManager.LoadScene(i);
     }
 
     public void ExitApplication()
     {
+        PlayerPrefs.SetInt("isRestart", 0);
         Application.Quit();
     }
 
