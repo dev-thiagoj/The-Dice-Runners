@@ -155,6 +155,12 @@ public class GameManager : Singleton<GameManager>
         SceneManager.LoadScene(i);
     }
 
+    public void GoToMenu(int i)
+    {
+        PlayerPrefs.SetInt("isRestart", 0);
+        SceneManager.LoadScene(i);
+    }
+
     public void ExitApplication()
     {
         PlayerPrefs.SetInt("viewedTutorial", 0);
