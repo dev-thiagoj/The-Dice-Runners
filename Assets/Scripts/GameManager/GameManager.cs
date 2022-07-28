@@ -82,9 +82,7 @@ public class GameManager : Singleton<GameManager>
 
     private void Update()
     {
-        if (_isGameStarted && Input.GetKeyDown(KeyCode.Escape)) PauseGame();
-
-        Debug.Log(maxScore);
+        if (_isGameStarted && Input.GetKeyUp(KeyCode.Escape)) PauseGame();
     }
 
     void TurnAllStarsOff()

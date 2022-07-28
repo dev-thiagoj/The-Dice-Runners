@@ -9,6 +9,10 @@ public class ItemCollectableMagnetic : ItemCollectableBase
     public float lerpSpeed = 5;
     public float minDistance = 1f;
 
+    [Header("Player Particle Field")]
+    [SerializeField] ForceFieldManager forceField;
+
+
     protected override void Collect()
     {
         OnCollect();
@@ -20,6 +24,7 @@ public class ItemCollectableMagnetic : ItemCollectableBase
         collider.enabled = false;
         collect = true;
         PlayerController.Instance.MagneticOn(true);
+        forceField.StartParticleField();
     }
 
     private void Update()
