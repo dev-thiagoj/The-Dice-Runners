@@ -243,14 +243,14 @@ public class PlayerController : Singleton<PlayerController>
         if (!_turboOn)
         {
             _turboOn = true;
-            _currRunSpeed = turboSpeed;
             SFXPool.Instance.Play(SFXType.USE_TURBO_06);
+            _currRunSpeed = turboSpeed;
             yield return new WaitForSeconds(turboTime);
         }
 
         _currRunSpeed = runSpeed;
         _turboOn = false;
-        //StopCoroutine(TurboCoroutine());
+        StopCoroutine(TurboCoroutine());
     }
 
     public void MagneticOn(bool b = false)
