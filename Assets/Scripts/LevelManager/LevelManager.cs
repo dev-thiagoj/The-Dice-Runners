@@ -5,7 +5,7 @@ using UnityEngine;
 public class LevelManager : MonoBehaviour
 {
     public Transform levelContainer;
-    public List<GameObject> levels;
+    //public List<GameObject> levels;
 
     [Header("Pieces")]
     public List<LevelPieceBase> startLevelPieces;
@@ -31,7 +31,7 @@ public class LevelManager : MonoBehaviour
 
     #region === Spawn ready track ===
     //tester SpawnNextLevel com a pista montada
-    void SpawnNextLevel()
+    /*void SpawnNextLevel()
     {
         if (_currLevel != null)
         {
@@ -51,7 +51,7 @@ public class LevelManager : MonoBehaviour
     void ResetIndexLevel()
     {
         _index = 0;
-    }
+    }*/
     #endregion
 
 

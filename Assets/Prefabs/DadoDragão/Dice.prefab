@@ -4834,7 +4834,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3059476383818136764}
-  m_LocalRotation: {x: 0.04218084, y: 0, z: 0, w: 0.99911}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 19.7, z: -14.179752}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -4842,7 +4842,7 @@ Transform:
   - {fileID: 1417986926387856794}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 4.835, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &3059476383818136753
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4871,7 +4871,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 10.405138, y: 8.557181, z: 7.9029527}
-  m_Center: {x: -0.250803, y: 0.27206755, z: -0.17031503}
+  m_Center: {x: -0.250803, y: 0, z: -0.17031503}
 --- !u!136 &537249636357538129
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -4885,7 +4885,7 @@ CapsuleCollider:
   m_Radius: 4.4
   m_Height: 18.77
   m_Direction: 0
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0, z: 0.66}
 --- !u!114 &1842043064602980397
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4900,6 +4900,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rigidbody: {fileID: 3059476383818136753}
   diceToRoll: {fileID: 3314588796354574534}
+  initialPos: {fileID: 0}
   audioSource: {fileID: 1636408417}
   speedRoll: 5.002
   moveSpeed: 5.5
@@ -4918,6 +4919,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioSource: {fileID: 1636408417}
+  collider: {fileID: 3207662733354019373}
   sfxVolume: 0
 --- !u!82 &1636408417
 AudioSource:
