@@ -8,11 +8,14 @@ using TMPro;
 
 public class GameManager : Singleton<GameManager>
 {
+
+    [Header("References")]
     public GameObject mainMenu;
     public GameObject uiValues;
     public GameObject cameraCanvas;
     public TextMeshProUGUI scoreText = null;
     public TextMeshProUGUI diceText = null;
+    public TextMeshProUGUI maxScoreText = null;
 
     [Header("Buttons Animation")]
     public GameObject btnContainer;
@@ -23,7 +26,11 @@ public class GameManager : Singleton<GameManager>
     public GameObject endGameScreen;
     public int finalScore;
     public int turboScore;
+    public int maxScore;
     public bool checkedEndLine = false;
+
+    [Header("Restart Game")]
+    public int isRestart; //padrão binário, 0 = não e 1 = sim.
 
     [Header("Final Stars")]
     int totalScore;
@@ -61,15 +68,21 @@ public class GameManager : Singleton<GameManager>
         Time.timeScale = 1;
         cameraCanvas.SetActive(false);
         uiValues.SetActive(false);
-        mainMenu.SetActive(true);
-        AnimationButtons();
-        _isGameStarted = false;
+
+        if (isRestart == 0)
+        {
+            mainMenu.SetActive(true);
+            AnimationButtons();
+            _isGameStarted = false;
+        }
+        else StartRun();
+
         TurnAllStarsOff();
     }
 
     private void Update()
     {
-        if (_isGameStarted && Input.GetKeyDown(KeyCode.Escape)) PauseGame();
+        if (_isGameStarted && Input.GetKeyUp(KeyCode.Escape)) PauseGame();
     }
 
     void TurnAllStarsOff()
@@ -78,13 +91,6 @@ public class GameManager : Singleton<GameManager>
         {
             gameObject.SetActive(false);
         }
-    }
-
-    public void PlayCameraAnimation()
-    {
-
-
-        StartRun();
     }
 
     public void AnimationButtons()
@@ -145,11 +151,20 @@ public class GameManager : Singleton<GameManager>
 
     public void RestartGame(int i)
     {
+        PlayerPrefs.SetInt("isRestart", 1);
+        SceneManager.LoadScene(i);
+    }
+
+    public void GoToMenu(int i)
+    {
+        PlayerPrefs.SetInt("isRestart", 0);
         SceneManager.LoadScene(i);
     }
 
     public void ExitApplication()
     {
+        PlayerPrefs.SetInt("viewedTutorial", 0);
+        PlayerPrefs.SetInt("isRestart", 0);
         Application.Quit();
     }
 
@@ -158,6 +173,7 @@ public class GameManager : Singleton<GameManager>
         TurnTurboInPoints();
         totalScore = ItemManager.Instance.dice * turboScore;
         if (checkedEndLine) totalScore += 300;
+        SaveMaxScore();
         StarsCalculate();
         scoreText.text = "Score: " + totalScore.ToString("000");
         diceText.text = "Dices: " + ItemManager.Instance.dice.ToString("000");
@@ -168,6 +184,24 @@ public class GameManager : Singleton<GameManager>
         turboScore = ItemManager.Instance.turbo;
 
         if (turboScore == 0) turboScore = 1;
+    }
+
+    void SaveMaxScore()
+    {
+        if (totalScore > maxScore)
+        {
+            maxScore = totalScore;
+
+            maxScoreText.text = ("NEW  " + maxScore).ToString();
+            maxScoreText.color = Color.green;
+
+            PlayerPrefs.SetInt("maxScore", maxScore);
+        }
+        else
+        {
+            maxScoreText.text = maxScore.ToString();
+            maxScoreText.color = Color.yellow;
+        }
     }
 
     void StarsCalculate()

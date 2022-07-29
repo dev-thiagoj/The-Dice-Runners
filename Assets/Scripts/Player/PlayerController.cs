@@ -127,7 +127,7 @@ public class PlayerController : Singleton<PlayerController>
     public void StartRun()
     {
         canRun = true;
-        Actions.startTutorial();
+        //Actions.startTutorial();
     }
 
     public void Move()
@@ -256,6 +256,7 @@ public class PlayerController : Singleton<PlayerController>
     public void MagneticOn(bool b = false)
     {
         if (b == true) StartCoroutine(MagneticCoroutine());
+        SFXPool.Instance.Play(SFXType.USE_MAGNETIC_08);
     }
 
     public IEnumerator MagneticCoroutine()

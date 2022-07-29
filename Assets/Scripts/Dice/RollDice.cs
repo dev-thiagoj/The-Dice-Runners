@@ -47,6 +47,7 @@ public class RollDice : Singleton<RollDice>
     public void StartRoll()
     {
         canMove = true;
+        Actions.startTutorial();
     }
 
     public void DestroyDice()
