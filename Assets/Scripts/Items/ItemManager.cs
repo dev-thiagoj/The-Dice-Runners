@@ -8,6 +8,8 @@ public class ItemManager : Singleton<ItemManager>
 {
     public TextMeshProUGUI uiTextDice = null;
     public TextMeshProUGUI uiTextTurbo = null;
+    public Transform withoutTurboText;
+    public float warningTime;
     public int dice;
     public int turbo;
 
@@ -46,5 +48,18 @@ public class ItemManager : Singleton<ItemManager>
     {
         uiTextDice.text = " x " + dice;
         uiTextTurbo.text = " x " + turbo;
+    }
+
+    public void WithoutTurboWarning()
+    {
+        StartCoroutine(WithoutTurboCoroutine());
+    }
+
+    public IEnumerator WithoutTurboCoroutine()
+    {
+        withoutTurboText.gameObject.SetActive(true);
+        yield return new WaitForSeconds(warningTime);
+        withoutTurboText.gameObject.SetActive(false);
+        StopCoroutine(WithoutTurboCoroutine());
     }
 }

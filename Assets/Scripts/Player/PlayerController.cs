@@ -173,8 +173,6 @@ public class PlayerController : Singleton<PlayerController>
         _currJumpForce = jumpForce;
         animator.speed = 1;
     }
-    #endregion
-
     bool IsGrounded()
     {
         Debug.DrawRay(transform.position, -Vector2.up, Color.magenta, distToGround + spaceToGround);
@@ -193,7 +191,7 @@ public class PlayerController : Singleton<PlayerController>
             characterController.transform.position = new Vector3(-range, transform.position.y, transform.position.z);
         }
     }
-
+    #endregion
 
     #region === HEALTH ===
     public void Dead()
@@ -235,7 +233,7 @@ public class PlayerController : Singleton<PlayerController>
             _currTurbo++;
             ItemManager.Instance.RemoveTurbo();
         }
-        else Debug.Log("Without turbo");
+        else ItemManager.Instance.WithoutTurboWarning();
     }
 
     public IEnumerator TurboCoroutine()
