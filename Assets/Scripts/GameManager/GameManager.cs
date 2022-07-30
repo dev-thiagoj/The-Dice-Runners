@@ -12,7 +12,7 @@ public class GameManager : Singleton<GameManager>
     [Header("References")]
     public GameObject mainMenu;
     public GameObject uiValues;
-    public GameObject cameraCanvas;
+    //public GameObject cameraCanvas;
     public TextMeshProUGUI scoreText = null;
     public TextMeshProUGUI diceText = null;
     public TextMeshProUGUI maxScoreText = null;
@@ -68,7 +68,7 @@ public class GameManager : Singleton<GameManager>
     void Start()
     {
         Time.timeScale = 1;
-        cameraCanvas.SetActive(false);
+        //cameraCanvas.SetActive(false);
         uiValues.SetActive(false);
 
         if (isRestart == 0)
@@ -109,7 +109,7 @@ public class GameManager : Singleton<GameManager>
     {
         SFXPool.Instance.CreatePool();
         _isGameStarted = true;
-        cameraCanvas.SetActive(true);
+        //cameraCanvas.SetActive(true);
         uiValues.SetActive(true);
         //StartCoroutine(TutorialCoroutine());
         PlayerController.Instance.InvokeStartRun();
@@ -141,7 +141,7 @@ public class GameManager : Singleton<GameManager>
     public void EndGame()
     {
         PlayerController.Instance.canRun = false;
-        cameraCanvas.SetActive(false);
+        //cameraCanvas.SetActive(false);
         uiValues.SetActive(false);
         femaleAnim.SetTrigger("FemaleWin");
         PlayerController.Instance.animator.SetTrigger("EndGame");

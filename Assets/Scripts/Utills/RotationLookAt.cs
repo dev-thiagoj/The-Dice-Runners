@@ -17,8 +17,6 @@ public class RotationLookAt : MonoBehaviour
             var rotation = Quaternion.LookRotation(lookPos);
             transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime);
         }
-
-        Debug.Log(target);
     }
 
     public Transform FindTarget()
