@@ -8,10 +8,11 @@ public class LevelManager : MonoBehaviour
     //public List<GameObject> levels;
 
     [Header("Pieces")]
+    public LevelPieceBase emptyPiece;
     public List<LevelPieceBase> startLevelPieces;
     public List<LevelPieceBase> levelPieces;
     public List<LevelPieceBase> endLevelPieces;
-    
+
     public int numberOfStartPieces = 3;
     public int numberOfPieces;
     public int numberOfEndPieces = 1;
@@ -75,6 +76,7 @@ public class LevelManager : MonoBehaviour
 
     void CreateLevel()
     {
+        BalanceWithEmptyPieces();
         StartCoroutine(CreateLevelPiecesCoroutine());
 
         /*_spawnedPieces = new List<LevelPieceBase>();
@@ -100,11 +102,23 @@ public class LevelManager : MonoBehaviour
             CreatePieces(levelPieces);
             yield return new WaitForSeconds(timeBetweenSpawns);
         }
-        
+
         for (int i = 0; i < numberOfEndPieces; i++)
         {
             CreatePieces(endLevelPieces);
             yield return new WaitForSeconds(timeBetweenSpawns);
+        }
+
+        Actions.findFemaleAnim();
+    }
+
+    void BalanceWithEmptyPieces()
+    {
+        var numberOfEmptys = levelPieces.Count / 3;
+
+        for (int i = 0; i < numberOfEmptys; i++)
+        {
+            levelPieces.Add(emptyPiece);
         }
 
     }

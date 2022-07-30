@@ -12,6 +12,10 @@ public class ItemCollectableMagnetic : ItemCollectableBase
     [Header("Player Particle Field")]
     [SerializeField] ForceFieldManager forceField;
 
+    private void OnValidate()
+    {
+        if (forceField == null) forceField = GetComponentInChildren<ForceFieldManager>();
+    }
 
     protected override void Collect()
     {

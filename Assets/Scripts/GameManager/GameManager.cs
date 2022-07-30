@@ -50,11 +50,13 @@ public class GameManager : Singleton<GameManager>
     private void OnEnable()
     {
         Actions.startTutorial += StartTutorialCoroutine;
+        Actions.findFemaleAnim += FindFemaleAnimInScene;
     }
 
     private void OnDisable()
     {
         Actions.startTutorial -= StartTutorialCoroutine;
+        Actions.findFemaleAnim -= FindFemaleAnimInScene;
     }
 
     protected override void Awake()
@@ -96,6 +98,11 @@ public class GameManager : Singleton<GameManager>
     public void AnimationButtons()
     {
         btnContainer.transform.DOScale(0, timeBtnAnim).SetEase(ease).From();
+    }
+
+    void FindFemaleAnimInScene()
+    {
+        femaleAnim = GameObject.Find("FemaleCharacter").GetComponent<Animator>();
     }
 
     public void StartRun()

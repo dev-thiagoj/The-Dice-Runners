@@ -39,6 +39,7 @@ public class PlayerController : Singleton<PlayerController>
 
     [Header("Magnetic Powerup")]
     public Transform magneticCollider;
+    public ForceFieldManager forceField;
     public float magneticSize;
     public float magneticTime;
     public bool _hasMagnetic = false;
@@ -59,6 +60,7 @@ public class PlayerController : Singleton<PlayerController>
 
     [Header("Look At EndGame")]
     public RotationLookAt rotationLook;
+    public string targetName;
 
     public bool _isAlive = true;
 
@@ -70,6 +72,7 @@ public class PlayerController : Singleton<PlayerController>
         playerMeshs = GetComponentsInChildren<MeshRenderer>();
         playerSkinned = GetComponentsInChildren<SkinnedMeshRenderer>();
         if (rotationLook == null) rotationLook = GetComponent<RotationLookAt>();
+        if (forceField == null) forceField = GetComponentInChildren<ForceFieldManager>();
     }
 
     protected override void Awake()
@@ -110,6 +113,10 @@ public class PlayerController : Singleton<PlayerController>
         if (Input.GetKeyUp(KeyCode.W)) BackRun();
     }
 
+    void FindLookAtTarget()
+    {
+        rotationLook.target = GameObject.Find("FemaleCharacter").GetComponent<Transform>();
+    }
 
     #region === MOVEMENTS ===
 
@@ -253,8 +260,13 @@ public class PlayerController : Singleton<PlayerController>
 
     public void MagneticOn(bool b = false)
     {
-        if (b == true) StartCoroutine(MagneticCoroutine());
-        SFXPool.Instance.Play(SFXType.USE_MAGNETIC_08);
+        if (b == true)
+        {
+            StartCoroutine(MagneticCoroutine());
+            forceField.StartParticleField();
+            SFXPool.Instance.Play(SFXType.USE_MAGNETIC_08);
+        } 
+            
     }
 
     public IEnumerator MagneticCoroutine()
@@ -313,4 +325,14 @@ public class PlayerController : Singleton<PlayerController>
     }
 
     #endregion
+
+    private void OnEnable()
+    {
+        Actions.findFemaleAnim += FindLookAtTarget;
+    }
+
+    private void OnDisable()
+    {
+        Actions.findFemaleAnim -= FindLookAtTarget;
+    }
 }

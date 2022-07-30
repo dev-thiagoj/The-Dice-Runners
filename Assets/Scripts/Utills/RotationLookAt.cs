@@ -6,14 +6,8 @@ public class RotationLookAt : MonoBehaviour
 {
     public bool canLook;
     public Transform target;
+    
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void Update()
     {
         if (canLook)
@@ -23,5 +17,16 @@ public class RotationLookAt : MonoBehaviour
             var rotation = Quaternion.LookRotation(lookPos);
             transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime);
         }
+
+        Debug.Log(target);
+    }
+
+    public Transform FindTarget()
+    {
+       var targetTransf = GameObject.Find("PFB_Piece_EndGame/EndGame/FemaleCharacter").GetComponent<Transform>();
+
+        target = targetTransf;
+
+        return target;
     }
 }
