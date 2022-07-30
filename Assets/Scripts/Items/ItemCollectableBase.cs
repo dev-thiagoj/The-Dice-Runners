@@ -20,7 +20,6 @@ public class ItemCollectableBase : MonoBehaviour
         if (other.transform.CompareTag("Player"))
         {
             Collect();
-            //if (audioSource != null) audioSource.Play();
         }
     }
 

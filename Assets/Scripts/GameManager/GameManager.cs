@@ -12,7 +12,7 @@ public class GameManager : Singleton<GameManager>
     [Header("References")]
     public GameObject mainMenu;
     public GameObject uiValues;
-    public GameObject cameraCanvas;
+    //public GameObject cameraCanvas;
     public TextMeshProUGUI scoreText = null;
     public TextMeshProUGUI diceText = null;
     public TextMeshProUGUI maxScoreText = null;
@@ -50,11 +50,13 @@ public class GameManager : Singleton<GameManager>
     private void OnEnable()
     {
         Actions.startTutorial += StartTutorialCoroutine;
+        Actions.findFemaleAnim += FindFemaleAnimInScene;
     }
 
     private void OnDisable()
     {
         Actions.startTutorial -= StartTutorialCoroutine;
+        Actions.findFemaleAnim -= FindFemaleAnimInScene;
     }
 
     protected override void Awake()
@@ -66,7 +68,7 @@ public class GameManager : Singleton<GameManager>
     void Start()
     {
         Time.timeScale = 1;
-        cameraCanvas.SetActive(false);
+        //cameraCanvas.SetActive(false);
         uiValues.SetActive(false);
 
         if (isRestart == 0)
@@ -98,11 +100,16 @@ public class GameManager : Singleton<GameManager>
         btnContainer.transform.DOScale(0, timeBtnAnim).SetEase(ease).From();
     }
 
+    void FindFemaleAnimInScene()
+    {
+        femaleAnim = GameObject.Find("FemaleCharacter").GetComponent<Animator>();
+    }
+
     public void StartRun()
     {
         SFXPool.Instance.CreatePool();
         _isGameStarted = true;
-        cameraCanvas.SetActive(true);
+        //cameraCanvas.SetActive(true);
         uiValues.SetActive(true);
         //StartCoroutine(TutorialCoroutine());
         PlayerController.Instance.InvokeStartRun();
@@ -134,7 +141,7 @@ public class GameManager : Singleton<GameManager>
     public void EndGame()
     {
         PlayerController.Instance.canRun = false;
-        cameraCanvas.SetActive(false);
+        //cameraCanvas.SetActive(false);
         uiValues.SetActive(false);
         femaleAnim.SetTrigger("FemaleWin");
         PlayerController.Instance.animator.SetTrigger("EndGame");

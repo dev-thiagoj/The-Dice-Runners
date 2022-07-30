@@ -194,7 +194,7 @@ MonoBehaviour:
   collect: 0
   lerpSpeed: 5
   minDistance: 1
-  forceField: {fileID: 0}
+  forceField: {fileID: 7455424223485904645}
 --- !u!1 &6001453074321614145
 GameObject:
   m_ObjectHideFlags: 0
