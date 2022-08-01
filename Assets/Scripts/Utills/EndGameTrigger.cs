@@ -11,7 +11,7 @@ public class EndGameTrigger : MonoBehaviour
             GameManager.Instance.checkedEndLine = true;
             PlayerController.Instance.animator.SetTrigger("Idle");
             PlayerController.Instance.rotationLook.canLook = true;
-            GameManager.Instance.EndGame();
+            GameManager.Instance.LevelComplete();
         }
     }
 }

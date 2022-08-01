@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Singleton;
 
-public class LevelManager : MonoBehaviour
+public class LevelManager : Singleton<LevelManager>
 {
     public Transform levelContainer;
     //public List<GameObject> levels;
@@ -14,7 +15,7 @@ public class LevelManager : MonoBehaviour
     public List<LevelPieceBase> endLevelPieces;
 
     public int numberOfStartPieces = 3;
-    public int numberOfPieces;
+    [SerializeField] private int numberOfPieces;
     public int numberOfEndPieces = 1;
     [Space]
     public float timeBetweenSpawns = .3f;
@@ -23,12 +24,42 @@ public class LevelManager : MonoBehaviour
     GameObject _currLevel;
     List<LevelPieceBase> _spawnedPieces;
 
-    private void Awake()
+    public int level = 0;
+
+    protected override void Awake()
     {
+        base.Awake();
+
         //SpawnNextLevel();
+    }
+
+    private void Start()
+    {
+        NumberOfPiecesManager();
+        LevelBounds();
         CreateLevel();
     }
 
+    #region === LEVEL MANAGER ===
+
+    public void LevelBounds()
+    {
+        if (numberOfPieces < 4) numberOfPieces = 4;
+        if (level >= 30) numberOfPieces = 30;
+    }
+
+    public void NumberOfPiecesManager()
+    {
+        numberOfPieces = level;
+    }
+
+    public void AddLevel()
+    {
+        level += 1;
+        PlayerPrefs.SetInt("level", level);
+    }
+
+    #endregion
 
     #region === Spawn ready track ===
     //tester SpawnNextLevel com a pista montada

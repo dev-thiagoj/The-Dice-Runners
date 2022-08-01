@@ -8,6 +8,8 @@ using DG.Tweening;
 
 public class PlayerController : Singleton<PlayerController>
 {
+    #region === VARIABLES ===
+
     public CharacterController characterController;
     public Animator animator;
     public AudioSource audioSource;
@@ -63,6 +65,7 @@ public class PlayerController : Singleton<PlayerController>
     public string targetName;
 
     public bool _isAlive = true;
+    #endregion
 
     private void OnValidate()
     {

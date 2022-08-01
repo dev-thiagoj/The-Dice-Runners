@@ -8,6 +8,7 @@ using TMPro;
 
 public class GameManager : Singleton<GameManager>
 {
+    #region === VARIABLES ===
 
     [Header("References")]
     public GameObject mainMenu;
@@ -22,23 +23,26 @@ public class GameManager : Singleton<GameManager>
     public Ease ease;
     public float timeBtnAnim;
 
-    [Header("End Game")]
-    public GameObject endGameScreen;
+    [Header("Level Complete")]
+    public GameObject levelCompleteScreen;
     public int finalScore;
     public int turboScore;
     public int maxScore;
     public bool checkedEndLine = false;
-
-    [Header("Restart Game")]
-    public int isRestart; //padrão binário, 0 = não e 1 = sim.
-
+    
     [Header("Final Stars")]
     int totalScore;
     public List<GameObject> fullStars;
 
+    [Header("GameOver Screen")]
+    public GameObject gameOverScreen;
+
     [Header("Pause Game")]
     public GameObject pauseScreen;
     private bool _isGameStarted;
+    
+    [Header("Restart Game")]
+    public int isRestart; //padrão binário, 0 = não e 1 = sim.
 
     [Header("Tutorial")]
     public GameObject[] tutorialImages;
@@ -46,6 +50,7 @@ public class GameManager : Singleton<GameManager>
 
     [Header("Female Animation")]
     public Animator femaleAnim;
+    #endregion
 
     private void OnEnable()
     {
@@ -107,6 +112,8 @@ public class GameManager : Singleton<GameManager>
 
     public void StartRun()
     {
+        if (_viewed == 0) PlayerPrefs.SetInt("level", 1);
+
         SFXPool.Instance.CreatePool();
         _isGameStarted = true;
         //cameraCanvas.SetActive(true);
@@ -141,31 +148,42 @@ public class GameManager : Singleton<GameManager>
     public void EndGame()
     {
         PlayerController.Instance.canRun = false;
-        //cameraCanvas.SetActive(false);
+        uiValues.SetActive(false);
+        Invoke(nameof(ShowGameOverScreen), 2);
+    }
+
+    public void LevelComplete()
+    {
+        PlayerController.Instance.canRun = false;
         uiValues.SetActive(false);
         femaleAnim.SetTrigger("FemaleWin");
         PlayerController.Instance.animator.SetTrigger("EndGame");
-        //RollDice.Instance.DestroyDice();
         UpdateUI();
-        Invoke(nameof(ShowEndGameScreen), 5);
+        Invoke(nameof(ShowLevelCompleteScreen), 5);
     }
 
-    public void ShowEndGameScreen()
+    public void ShowLevelCompleteScreen()
     {
-        endGameScreen.SetActive(true);
+        levelCompleteScreen.SetActive(true);
+        Cursor.visible = true;
+    }
+    
+    public void ShowGameOverScreen()
+    {
+        gameOverScreen.SetActive(true);
         Cursor.visible = true;
     }
 
-    public void RestartGame(int i)
+    public void RestartGame()
     {
         PlayerPrefs.SetInt("isRestart", 1);
-        SceneManager.LoadScene(i);
+        SceneManager.LoadScene(0);
     }
 
-    public void GoToMenu(int i)
+    public void GoToMenu()
     {
         PlayerPrefs.SetInt("isRestart", 0);
-        SceneManager.LoadScene(i);
+        SceneManager.LoadScene(0);
     }
 
     public void ExitApplication()
