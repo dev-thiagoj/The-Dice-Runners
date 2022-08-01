@@ -49,5 +49,12 @@ public class LoadPrefs : MonoBehaviour
 
             LevelManager.Instance.level = localLevel;
         }
+
+        if (PlayerPrefs.HasKey("piecesNumber"))
+        {
+            int localValue = PlayerPrefs.GetInt("piecesNumber");
+
+            LevelManager.Instance.numberOfPieces = localValue;
+        }
     }
 }

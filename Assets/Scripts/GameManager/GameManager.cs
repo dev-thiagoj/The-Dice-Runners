@@ -50,6 +50,10 @@ public class GameManager : Singleton<GameManager>
 
     [Header("Female Animation")]
     public Animator femaleAnim;
+
+    //Debug
+    public TextMeshProUGUI levelDebug;
+    public TextMeshProUGUI piecesDebug;
     #endregion
 
     private void OnEnable()
@@ -85,6 +89,9 @@ public class GameManager : Singleton<GameManager>
         else StartRun();
 
         TurnAllStarsOff();
+
+        levelDebug.text = "Level: " + LevelManager.Instance.level;
+        piecesDebug.text = "Pieces: " + LevelManager.Instance.numberOfPieces;
     }
 
     private void Update()
@@ -112,8 +119,6 @@ public class GameManager : Singleton<GameManager>
 
     public void StartRun()
     {
-        if (_viewed == 0) PlayerPrefs.SetInt("level", 1);
-
         SFXPool.Instance.CreatePool();
         _isGameStarted = true;
         //cameraCanvas.SetActive(true);

@@ -15,7 +15,7 @@ public class LevelManager : Singleton<LevelManager>
     public List<LevelPieceBase> endLevelPieces;
 
     public int numberOfStartPieces = 3;
-    [SerializeField] private int numberOfPieces;
+    public int numberOfPieces;
     public int numberOfEndPieces = 1;
     [Space]
     public float timeBetweenSpawns = .3f;
@@ -24,7 +24,7 @@ public class LevelManager : Singleton<LevelManager>
     GameObject _currLevel;
     List<LevelPieceBase> _spawnedPieces;
 
-    public int level = 0;
+    public int level = 1;
 
     protected override void Awake()
     {
@@ -35,6 +35,11 @@ public class LevelManager : Singleton<LevelManager>
 
     private void Start()
     {
+        Init();
+    }
+
+    public void Init()
+    {
         NumberOfPiecesManager();
         LevelBounds();
         CreateLevel();
@@ -44,17 +49,19 @@ public class LevelManager : Singleton<LevelManager>
 
     public void LevelBounds()
     {
-        if (numberOfPieces < 4) numberOfPieces = 4;
+        if (level < 3) numberOfPieces = 4;
         if (level >= 30) numberOfPieces = 30;
     }
 
     public void NumberOfPiecesManager()
     {
-        numberOfPieces = level;
+        if(level % 2 == 0) numberOfPieces += 1;
+
     }
 
     public void AddLevel()
     {
+        PlayerPrefs.SetInt("piecesNumber", numberOfPieces);
         level += 1;
         PlayerPrefs.SetInt("level", level);
     }
