@@ -29,8 +29,11 @@ public class GameManager : Singleton<GameManager>
     public int turboScore;
     public int maxScore;
     public bool checkedEndLine = false;
-    
+
     [Header("Final Stars")]
+    int activeDices;
+    int activeTurbos;
+    int maxPossibleScore;
     int totalScore;
     public List<GameObject> fullStars;
 
@@ -51,9 +54,10 @@ public class GameManager : Singleton<GameManager>
     [Header("Female Animation")]
     public Animator femaleAnim;
 
-    //Debug
+    [Header("Debug")]
     public TextMeshProUGUI levelDebug;
     public TextMeshProUGUI piecesDebug;
+    public TextMeshProUGUI maxPosScoreDebug;
     #endregion
 
     private void OnEnable()
@@ -88,15 +92,25 @@ public class GameManager : Singleton<GameManager>
         }
         else StartRun();
 
-        TurnAllStarsOff();
+        Invoke(nameof(ActiveCollectablesCount), 2);
 
-        levelDebug.text = "Level: " + LevelManager.Instance.level;
-        piecesDebug.text = "Pieces: " + LevelManager.Instance.numberOfPieces;
+        
     }
 
     private void Update()
     {
         if (_isGameStarted && Input.GetKeyUp(KeyCode.Escape)) PauseGame();
+    }
+
+    public void ActiveCollectablesCount()
+    {
+        activeDices = FindObjectsOfType(typeof(ItemCollectableCoin)).Length;
+        activeTurbos = FindObjectsOfType(typeof(ItemCollectableTurbo)).Length;
+        levelDebug.text = "Dices = " + activeDices;
+        piecesDebug.text = "Turbos = " + activeTurbos;
+
+        maxPossibleScore = activeDices * (activeTurbos + PlayerController.Instance.maxTurbos);
+        maxPosScoreDebug.text = "Max Pos= " + maxPossibleScore;
     }
 
     void TurnAllStarsOff()
@@ -202,7 +216,7 @@ public class GameManager : Singleton<GameManager>
     {
         TurnTurboInPoints();
         totalScore = ItemManager.Instance.dice * turboScore;
-        if (checkedEndLine) totalScore += 300;
+        //if (checkedEndLine) totalScore += 300;
         SaveMaxScore();
         StarsCalculate();
         scoreText.text = "Score: " + totalScore.ToString("000");
@@ -236,16 +250,16 @@ public class GameManager : Singleton<GameManager>
 
     void StarsCalculate()
     {
-        if (totalScore > 200 && totalScore < 500)
+        if (totalScore > maxPossibleScore * 0.2f && totalScore < maxPossibleScore * 0.4f)
         {
             fullStars[0].SetActive(true);
         }
-        else if (totalScore >= 500 && totalScore < 700)
+        else if (totalScore >= maxPossibleScore * 0.4f && totalScore < maxPossibleScore * 0.7f)
         {
             fullStars[0].SetActive(true);
             fullStars[1].SetActive(true);
         }
-        else if (totalScore >= 700)
+        else if (totalScore >= maxPossibleScore * 0.7f)
         {
             foreach (var star in fullStars)
             {
