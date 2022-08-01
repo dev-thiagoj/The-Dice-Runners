@@ -8,6 +8,7 @@ public class SmashTrapManager : MonoBehaviour
     public Transform trap;
     public ParticleSystem particleSystem;
     public Collider collider;
+    public GameObject smashCollider;
     public MeshRenderer meshRenderer;
 
     [Space]
@@ -17,8 +18,6 @@ public class SmashTrapManager : MonoBehaviour
     public float timeToDestroy = 3;
     public Ease ease;
 
-    //private TimerHelper timerHelper;
-
     private void OnValidate()
     {
         //if (_timerHelper == null) _timerHelper = GetComponentInParent<TimerHelper>();
@@ -26,6 +25,16 @@ public class SmashTrapManager : MonoBehaviour
         if (particleSystem == null) particleSystem = GetComponentInChildren<ParticleSystem>();
         if (collider == null) collider = GetComponent<Collider>();
         if (meshRenderer == null) meshRenderer = GetComponent<MeshRenderer>();
+    }
+    
+    public void DisableSmash()
+    {
+        smashCollider.SetActive(false);
+    }
+
+    public void EnableSmash()
+    {
+        smashCollider.SetActive(true);
     }
 
     void Start()
@@ -41,14 +50,17 @@ public class SmashTrapManager : MonoBehaviour
     public void TrapClose()
     {
         transform.DOMoveX(1 * dir, moveDuration).SetLoops(2, LoopType.Yoyo).SetEase(ease);
+        Invoke(nameof(DisableSmash), 1);
     }
 
     public IEnumerator SmashTrapCoroutine()
     {
         while (true)
         {
+            EnableSmash();
             TrapClose();
             yield return new WaitForSeconds(delaySmashs);
+            
         }
     }
 

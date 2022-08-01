@@ -275,6 +275,10 @@ PrefabInstance:
       propertyPath: dir
       value: 1.7
       objectReference: {fileID: 0}
+    - target: {fileID: 8497005312250070209, guid: c428cce7819544e43825d891347548d3, type: 3}
+      propertyPath: smashCollider
+      value: 
+      objectReference: {fileID: 3478011286216050101}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c428cce7819544e43825d891347548d3, type: 3}
 --- !u!4 &4126606994919870232 stripped
@@ -389,6 +393,10 @@ PrefabInstance:
       propertyPath: dir
       value: -1.7
       objectReference: {fileID: 0}
+    - target: {fileID: 8497005312250070209, guid: c428cce7819544e43825d891347548d3, type: 3}
+      propertyPath: smashCollider
+      value: 
+      objectReference: {fileID: 5203468390848812349}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c428cce7819544e43825d891347548d3, type: 3}
 --- !u!1 &4700881349498126070 stripped
